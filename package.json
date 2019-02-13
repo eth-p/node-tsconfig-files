@@ -1,0 +1,37 @@
+{
+	"name": "tsconfig-files",
+	"version": "1.0.0",
+	"description": "A small library to find source files from a tsconfig.json file.",
+	"main": "dist/index.js",
+	"types": "types",
+	"scripts": {
+		"test": "npm jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/eth-p/node-tsconfig-files.git"
+	},
+	"keywords": [
+		"tsconfig"
+	],
+	"author": "eth-p",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/eth-p/node-tsconfig-files/issues"
+	},
+	"homepage": "https://github.com/eth-p/node-tsconfig-files#readme",
+	"devDependencies": {
+		"@types/find-up": "^2.1.1",
+		"@types/fs-extra": "^5.0.5",
+		"@types/micromatch": "^3.1.0",
+		"@types/node": "^11.9.3",
+		"typescript": "^3.3.3"
+	},
+	"dependencies": {
+		"array.prototype.flat": "^1.2.1",
+		"find-up": "^3.0.0",
+		"fs-extra": "^7.0.1",
+		"fs-readdirp": "^1.0.0",
+		"micromatch": "^3.1.10"
+	}
+}
