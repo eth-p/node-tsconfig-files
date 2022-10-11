@@ -1,13 +1,13 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// tsconfig-files | https://github.com/eth-p/node-tsconfig-files | Copyright (C) 2019 eth-p
+// tsconfig-files | https://github.com/eth-p/node-tsconfig-files | Copyright (C) 2019-2022 eth-p
 // ---------------------------------------------------------------------------------------------------------------------
-import * as Filesystem from "fs-extra";
 import * as Micromatch from "micromatch";
 import * as Path from "path";
 
 import findUp = require("find-up");
 import flat = require("array.prototype.flat");
 import {readdirp, readdirpSync} from "fs-readdirp";
+import {jsonc} from "jsonc";
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -22,7 +22,8 @@ import {readdirp, readdirpSync} from "fs-readdirp";
 export async function getFilesFromTsconfig(cwd: string): Promise<string[]> {
 	let tsconfig = await findUp.sync('tsconfig.json', {cwd});
 	if (tsconfig == null) throw new Error('Could not find tsconfig.json');
-	return await getFilesFromTsconfigJson(await Filesystem.readJSON(tsconfig), cwd);
+
+	return await getFilesFromTsconfigJson(await jsonc.read(tsconfig), cwd);
 }
 
 /**
@@ -36,7 +37,7 @@ export async function getFilesFromTsconfig(cwd: string): Promise<string[]> {
 export function getFilesFromTsconfigSync(cwd: string): string[] {
 	let tsconfig = findUp.sync('tsconfig.json', {cwd});
 	if (tsconfig == null) throw new Error('Could not find tsconfig.json');
-	return getFilesFromTsconfigJsonSync(Filesystem.readJSONSync(tsconfig), cwd);
+	return getFilesFromTsconfigJsonSync(jsonc.readSync(tsconfig), cwd);
 }
 
 /**
@@ -69,7 +70,6 @@ export async function getFilesFromTsconfigJson(json: any, cwd: string): Promise<
 }
 
 /**
- * }
  * Synchronously finds the files from the contents of a tsconfig.json file.
  *
  * @param json The tsconfig.json object.
